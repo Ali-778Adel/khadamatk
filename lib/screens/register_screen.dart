@@ -282,10 +282,11 @@ class RegisterScreen extends StatelessWidget {
             HandleToastMeaasge.showToastMessage(context:context,message: 'loading ...', enumState: EnumState.WARNING);
           }
           else if (state is RegisterSuccessState) {
-            if (state.authModel.success!) {
+            if (state.authenticationModel.success!) {
               HandleToastMeaasge.showToastMessage(
                   context: context,
-                  message:' yoy are registered successfully',
+                  message:' yoy are registered successfully \n'
+                      '${state.authenticationModel.success}',
                   enumState: EnumState.SUCCESS);
               Navigator.push(
                 context,
@@ -296,7 +297,8 @@ class RegisterScreen extends StatelessWidget {
           } else if (state is RegisterFailureState) {
               HandleToastMeaasge.showToastMessage(
                   context: context,
-                  message: 'البيانات المدخلة غير صحية ',
+                  message: '${state.authenticationModel.message}\n'
+                      'البيانات المدخلة غير صحية ',
                   enumState: EnumState.WARNING);
 
           }

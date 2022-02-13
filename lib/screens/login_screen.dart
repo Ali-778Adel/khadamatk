@@ -26,7 +26,6 @@ class LoginScreen extends StatelessWidget {
                   buttonText: 'Log in',
                   function: (){
                     cubit.onLoginPressed(context: context,
-                        name: '??//',
                         phone: loginEmailController.text,
                         password: loginPasswordController.text);
 
@@ -197,14 +196,14 @@ class LoginScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>const Scaffold()),
+                      builder: (context) =>const Scaffold(body: Center(child: Text('Client Side 2',style:TextStyle(color: Colors.red,fontSize: 40),),),)),
                 );
 
             } else if (state is LoginFailureState) {
                 HandleToastMeaasge.showToastMessage(
                     context: context,
                     message: ('${LoginCubit.get(context).response}'
-                        'البانات المدخلة غير صحيحة'
+                        'البانات المدخلة غير صحيحة  '
 
 
                     ),

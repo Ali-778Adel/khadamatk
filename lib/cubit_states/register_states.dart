@@ -1,5 +1,6 @@
 
 import 'package:khadamatic_auth/models/auth_model.dart';
+import 'package:khadamatic_auth/models/authentication_model.dart';
 
 abstract class RegisterStates{}
 
@@ -9,12 +10,11 @@ class PasswordsVisibilityState extends RegisterStates {}
 class RegisterLoadingState extends RegisterStates {}
 
 class RegisterSuccessState extends RegisterStates {
-  final AuthModel authModel;
-
-  RegisterSuccessState(this.authModel);
+  final AuthenticationModel authenticationModel;
+  RegisterSuccessState(this.authenticationModel);
 }
 
 class RegisterFailureState extends RegisterStates {
-
-  RegisterFailureState();
+  final AuthenticationModel authenticationModel;
+  RegisterFailureState(this.authenticationModel);
 }
