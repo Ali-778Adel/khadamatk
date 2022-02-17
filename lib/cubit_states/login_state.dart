@@ -12,11 +12,11 @@ class PasswordsVisibilityState extends LoginStates {}
 class LoginLoadingState extends LoginStates {}
 
 class LoginSuccessState extends LoginStates {
-  // final LoginModel loginModel;
-  // LoginSuccessState(this.loginModel);
+   LoginModel loginModel;
+  LoginSuccessState(this.loginModel);
 }
 
 class LoginFailureState extends LoginStates {
-  // final LoginModel loginModel;
-  // LoginFailureState(this.loginModel);
+  final LoginModel loginModel;
+  LoginFailureState(this.loginModel);
 }

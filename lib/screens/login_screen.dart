@@ -5,6 +5,7 @@ import 'package:khadamatic_auth/components/ToastMessage.dart';
 import 'package:khadamatic_auth/cubit/login_cubit.dart';
 import 'package:khadamatic_auth/cubit_states/login_state.dart';
 import 'package:khadamatic_auth/screens/register_screen.dart';
+import 'package:khadamatic_auth/screens/worker/worker_homepage.dart';
 import 'package:khadamatic_auth/widgets/custom_elevated_button.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -172,7 +173,7 @@ class LoginScreen extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            RegisterScreen()));
+                                            ClientRegisterScreen()));
                               },
                             ),
                           )
@@ -193,11 +194,21 @@ class LoginScreen extends StatelessWidget {
                     context: context,
                     message: ' you logged in successfully',
                     enumState: EnumState.SUCCESS);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>const Scaffold(body: Center(child: Text('Client Side 2',style:TextStyle(color: Colors.red,fontSize: 40),),),)),
-                );
+                if (state.loginModel.type==1){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>const Scaffold(body: Center(child: Text('Client Side 2',style:TextStyle(color: Colors.red,fontSize: 40),),),)),
+                  );
+
+                }else{
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>const TechnicalHomePage()),
+                  );
+                }
+
 
             } else if (state is LoginFailureState) {
                 HandleToastMeaasge.showToastMessage(

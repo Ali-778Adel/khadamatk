@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:khadamatic_auth/constants/endpoints.dart';
-import 'package:khadamatic_auth/cubit_states/client_register_states.dart';
-import 'package:khadamatic_auth/models/auth_model.dart';
-import 'package:khadamatic_auth/models/authentication_model.dart';
 import 'package:khadamatic_auth/networks/authentication_dio_helper.dart';
 import 'package:khadamatic_auth/sharedpref/sharedpref.dart';
+import '../../cubit_states/worker/technical_register_states.dart';
+import '../../models/technical_register_model.dart';
 
-class RegisterCubit extends Cubit<RegisterStates> {
-  RegisterCubit() : super(RegisterInitState());
-  static RegisterCubit get(context) => BlocProvider.of(context);
+class TechnicalRegisterCubit extends Cubit<TechnicalRegisterStates> {
+  TechnicalRegisterCubit() : super(TRegisterInitState());
+  static TechnicalRegisterCubit get(context) => BlocProvider.of(context);
   var registerFormKey = GlobalKey<FormState>();
-  // AuthModel? authModel;
-  AuthenticationModel ?authenticationModel;
+  TechnicalRegisterModel ?technicalRegisterModel;
   bool obsecureText = true;
   var IconData = const Icon(Icons.visibility_off_outlined);
   void onPasswordSuffixIconTaped() {
@@ -51,25 +49,30 @@ class RegisterCubit extends Cubit<RegisterStates> {
       required String passwordConfirmation,
       required String phone}) async {
     emit(RegisterLoadingState());
-    await AuthenticationDioHelper.sendUserData(url: clientRegister, data: {
+    await AuthenticationDioHelper.sendUserData(url: TechnicalRegister, data: {
       'name': name,
       'email': email,
       'password': password,
       'password_confirmation': passwordConfirmation,
-      'phone': phone
+      'phone': phone,
+      'sub_category_id':'2',
+      'description':'نجار',
+      'type':'2',
+      'area_id':'1',
     }).then((value) {
-     authenticationModel=AuthenticationModel.fromJson(value.data);
       var response = value.data;
-      print(authenticationModel!.data!.user!.email);
+      print('response  is${response.toString()}');
+      technicalRegisterModel=TechnicalRegisterModel.fromJson(value.data);
+      print(technicalRegisterModel!.data!.user!.email);
       print('response  is${response.toString()}');
       setUserDataToSharedPref(
-          token: authenticationModel!.data!.token,
-          name: authenticationModel!.data!.user!.name,
-          email:authenticationModel!.data!.user!.email,
-          phoneNumber:authenticationModel!.data!.user!.phone);
-      emit(RegisterSuccessState(authenticationModel!));
+          token: technicalRegisterModel!.data!.token,
+          name: technicalRegisterModel!.data!.user!.name,
+          email:technicalRegisterModel!.data!.user!.email,
+          phoneNumber:technicalRegisterModel!.data!.user!.phone);
+      emit(RegisterSuccessState(technicalRegisterModel!));
     }).catchError((error) {
-      emit(RegisterFailureState(authenticationModel!));
+      emit(RegisterFailureState(technicalRegisterModel!));
       print('error on send sendregisterUserData ${error.toString()}');
 
     });

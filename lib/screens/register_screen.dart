@@ -1,14 +1,13 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:khadamatic_auth/components/ToastMessage.dart';
-import 'package:khadamatic_auth/cubit/register_cubit.dart';
-import 'package:khadamatic_auth/cubit_states/register_states.dart';
+import 'package:khadamatic_auth/cubit/client_register_cubit.dart';
+import 'package:khadamatic_auth/cubit_states/client_register_states.dart';
 import 'package:khadamatic_auth/widgets/custom_elevated_button.dart';
 import 'login_screen.dart';
 
-class RegisterScreen extends StatelessWidget {
+class ClientRegisterScreen extends StatelessWidget {
   var fullNameController = TextEditingController();
   var phoneController = TextEditingController();
   var emailController = TextEditingController();
@@ -21,7 +20,6 @@ class RegisterScreen extends StatelessWidget {
         body: BlocConsumer<RegisterCubit, RegisterStates>(
             builder: (context, state) {
               RegisterCubit cubit = RegisterCubit.get(context);
-
               Widget checkIfRegisterDataSent() {
                 if (state is RegisterLoadingState) {
                   return const Center(child: CircularProgressIndicator());
@@ -279,14 +277,17 @@ class RegisterScreen extends StatelessWidget {
               );
             }, listener: (context, state) {
           if (state is RegisterLoadingState){
-            HandleToastMeaasge.showToastMessage(context:context,message: 'loading ...', enumState: EnumState.WARNING);
+            HandleToastMeaasge.showToastMessage(context:context,
+                message: 'loading ...',
+                enumState: EnumState.WARNING);
           }
           else if (state is RegisterSuccessState) {
             if (state.authenticationModel.success!) {
               HandleToastMeaasge.showToastMessage(
                   context: context,
                   message:' yoy are registered successfully \n'
-                      '${state.authenticationModel.success}',
+                      '${state.authenticationModel.success}'
+                      '${state.authenticationModel.message}',
                   enumState: EnumState.SUCCESS);
               Navigator.push(
                 context,

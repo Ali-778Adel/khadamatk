@@ -1,4 +1,4 @@
-// const String Login='login';
-// const String Register='register';
-const String Register='/client-register';
+
+const String ClientRegister='/client-register';
+const String TechnicalRegister='/technical-register';
 const String Login='/login';

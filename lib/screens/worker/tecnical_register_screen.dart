@@ -2,12 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:khadamatic_auth/components/ToastMessage.dart';
-import 'package:khadamatic_auth/cubit/client_register_cubit.dart';
-import 'package:khadamatic_auth/cubit_states/client_register_states.dart';
+import 'package:khadamatic_auth/cubit/worker/technical_register_cubit.dart';
+import 'package:khadamatic_auth/screens/login_screen.dart';
+import 'package:khadamatic_auth/screens/worker/worker_homepage.dart';
 import 'package:khadamatic_auth/widgets/custom_elevated_button.dart';
-import 'login_screen.dart';
 
-class RegisterScreen extends StatelessWidget {
+import '../../cubit_states/worker/technical_register_states.dart';
+
+class TechnicalRegisterScreen extends StatelessWidget {
   var fullNameController = TextEditingController();
   var phoneController = TextEditingController();
   var emailController = TextEditingController();
@@ -17,9 +19,9 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(),
-        body: BlocConsumer<RegisterCubit, RegisterStates>(
+        body: BlocConsumer<TechnicalRegisterCubit, TechnicalRegisterStates>(
             builder: (context, state) {
-              RegisterCubit cubit = RegisterCubit.get(context);
+              TechnicalRegisterCubit cubit = TechnicalRegisterCubit.get(context);
               Widget checkIfRegisterDataSent() {
                 if (state is RegisterLoadingState) {
                   return const Center(child: CircularProgressIndicator());
@@ -282,23 +284,23 @@ class RegisterScreen extends StatelessWidget {
                 enumState: EnumState.WARNING);
           }
           else if (state is RegisterSuccessState) {
-            if (state.authenticationModel.success!) {
+            if (state.technicalRegisterModel.success!) {
               HandleToastMeaasge.showToastMessage(
                   context: context,
                   message:' yoy are registered successfully \n'
-                      '${state.authenticationModel.success}'
-                      '${state.authenticationModel.message}',
+                      '${state.technicalRegisterModel.success}'
+                      '${state.technicalRegisterModel.message}',
                   enumState: EnumState.SUCCESS);
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>const Scaffold(body: Center(child: Text('Client Side',style: TextStyle(fontSize: 44),),),)),
+                    builder: (context) =>const TechnicalHomePage()),
               );
             }
           } else if (state is RegisterFailureState) {
               HandleToastMeaasge.showToastMessage(
                   context: context,
-                  message: '${state.authenticationModel.message}\n'
+                  message: '${state.technicalRegisterModel.message}\n'
                       'البيانات المدخلة غير صحية ',
                   enumState: EnumState.WARNING);
 

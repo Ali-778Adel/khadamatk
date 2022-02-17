@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:khadamatic_auth/constants/endpoints.dart';
-import 'package:khadamatic_auth/cubit_states/register_states.dart';
+import 'package:khadamatic_auth/cubit_states/client_register_states.dart';
 import 'package:khadamatic_auth/models/auth_model.dart';
 import 'package:khadamatic_auth/models/authentication_model.dart';
 import 'package:khadamatic_auth/networks/authentication_dio_helper.dart';
@@ -51,12 +51,15 @@ class RegisterCubit extends Cubit<RegisterStates> {
       required String passwordConfirmation,
       required String phone}) async {
     emit(RegisterLoadingState());
-    await AuthenticationDioHelper.sendUserData(url: Register, data: {
+    await AuthenticationDioHelper.sendUserData(url: ClientRegister, data: {
       'name': name,
       'email': email,
       'password': password,
       'password_confirmation': passwordConfirmation,
-      'phone': phone
+      'phone': phone,
+
+
+
     }).then((value) {
      authenticationModel=AuthenticationModel.fromJson(value.data);
       var response = value.data;

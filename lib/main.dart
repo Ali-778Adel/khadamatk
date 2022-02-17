@@ -1,12 +1,17 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:khadamatic_auth/constants/AppThemes.dart';
 import 'package:khadamatic_auth/constants/Bloc_Observer.dart';
 import 'package:khadamatic_auth/cubit/login_cubit.dart';
-import 'package:khadamatic_auth/cubit/register_cubit.dart';
+import 'package:khadamatic_auth/cubit/client_register_cubit.dart';
+import 'package:khadamatic_auth/cubit/worker/worker_homepage_cubit.dart';
 import 'package:khadamatic_auth/networks/authentication_dio_helper.dart';
+import 'package:khadamatic_auth/screens/client_technical_option.dart';
 import 'package:khadamatic_auth/screens/login_screen.dart';
 import 'package:khadamatic_auth/sharedpref/sharedpref.dart';
+
+import 'cubit/worker/technical_register_cubit.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,13 +45,15 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => LoginCubit()),
         BlocProvider(create: (context) => RegisterCubit()),
+        BlocProvider(create: (context) => TechnicalRegisterCubit()),
+        BlocProvider(create: (context) => WorkerHomePageCubit()),
 
 
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: lightTheme,
-        home: LoginScreen(),
+        home: const ClientTechnicalOptionScreen(),
       ),
     );
   }

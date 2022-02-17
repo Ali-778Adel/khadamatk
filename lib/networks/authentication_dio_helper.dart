@@ -8,11 +8,12 @@ class AuthenticationDioHelper {
       BaseOptions(
           baseUrl: 'https://cleaning.3m-erp.com/khadamaty/api',
           receiveDataWhenStatusError: true,
-          headers: {'Accept': 'application/json'}),
+          headers: {'Accept': 'application/json',
+          }),
     );
     print ('dio is not equall null');
   }
-
+//send user auth data
   static Future<Response> sendUserData(
       {required String url,
       required Map<String, dynamic> data,
@@ -22,4 +23,16 @@ class AuthenticationDioHelper {
       print('error in send data in dio package${error.toString()}');
     });
   }
+//get all technical orders
+ static Future<Response> getAllTechnicalOrders(
+  {required String url,
+  required Map<String,dynamic>query
+  }
+     )async{
+    return await dio!.get(url,queryParameters: query ).catchError((error){
+      print('error on dio getAllTechnicalOrders ${error.toString()}');
+    });
+
+ }
+
 }

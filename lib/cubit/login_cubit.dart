@@ -52,9 +52,10 @@ class LoginCubit extends Cubit<LoginStates> {
     ).then((value) {
       response = value.data;
       print('login reponse is ${response.toString()}');
-      emit(LoginSuccessState());
+      loginModel=LoginModel.fromJson(value.data);
+      emit(LoginSuccessState(loginModel!));
     }).catchError((error) {
-      emit(LoginFailureState());
+      emit(LoginFailureState(loginModel!));
       print('error error error error error ${error.toString()}');
     });
   }
