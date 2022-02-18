@@ -1,16 +1,16 @@
 class ClientOrdersModel {
-  int? currentPage;
+  num? currentPage;
   List<DataClientOrders>? data;
   String? firstPageUrl;
-  int? from;
-  int? lastPage;
+  num? from;
+  num? lastPage;
   String? lastPageUrl;
   Null? nextPageUrl;
   String? path;
-  int? perPage;
+  num? perPage;
   Null? prevPageUrl;
-  int? to;
-  int? total;
+  num? to;
+  num? total;
 
   ClientOrdersModel(
       {this.currentPage,
@@ -67,13 +67,13 @@ class ClientOrdersModel {
 }
 
 class DataClientOrders {
-  int? id;
-  int? clientId;
-  int? technicalId;
-  int? subCategoryId;
-  int? serviceId;
-  int? orderTypeId;
-  int? paymentTypeId;
+  num? id;
+  num? clientId;
+  num? technicalId;
+  num? subCategoryId;
+  num? serviceId;
+  num? orderTypeId;
+  num? paymentTypeId;
   String? address;
   String? lat;
   String? long;
@@ -86,7 +86,7 @@ class DataClientOrders {
   String? time;
   String? createdAt;
   String? updatedAt;
-  Null? fees;
+  num? fees;
   Service? service;
   Payment? payment;
   OrderType? orderType;
@@ -201,11 +201,11 @@ class DataClientOrders {
 }
 
 class Service {
-  int? id;
-  int? subCategoryId;
+  num? id;
+  num? subCategoryId;
   String? name;
   String? nameAr;
-  int? active;
+  num? active;
   String? image;
   Null? createdAt;
   String? updatedAt;
@@ -246,10 +246,10 @@ class Service {
 }
 
 class Payment {
-  int? id;
+  num? id;
   String? name;
   String? nameAr;
-  int? active;
+  num? active;
   Null? createdAt;
   Null? updatedAt;
 
@@ -283,7 +283,7 @@ class Payment {
 }
 
 class OrderType {
-  int? id;
+  num? id;
   String? type;
   String? createdAt;
   String? updatedAt;
@@ -308,18 +308,18 @@ class OrderType {
 }
 
 class Technical {
-  int? id;
+  num? id;
   String? name;
   String? email;
   String? phone;
-  int? type;
+  num? type;
   String? image;
-  int? status;
+  num? status;
   String? description;
   Null? emailVerifiedAt;
   String? createdAt;
   String? updatedAt;
-  int? rate;
+  num? rate;
 
   Technical(
       {this.id,
@@ -369,8 +369,8 @@ class Technical {
 }
 
 class Images {
-  int? id;
-  int? orderId;
+  num? id;
+  num? orderId;
   String? image;
   String? createdAt;
   String? updatedAt;

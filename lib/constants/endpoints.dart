@@ -5,3 +5,4 @@ const String Login='/login';
 const String categories = '/categories';
 const String bestTech = '/best-technicals';
 const String allClientOrders= '/show-all-client-orders';
+const String clientProfile= '/profile';

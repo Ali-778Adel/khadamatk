@@ -124,8 +124,8 @@ class HomeScreen extends StatelessWidget {
               .copyWith(color: KMainColor),
         ),
         Text(
-         model.userService==null || model.userService!.subCategory==null? 'Seb'
-             'aka.':model
+         model.userService==null || model.userService!.subCategory==null?
+             'سباكة.':model
             .userService!
              .subCategory!
              .nameAr!,

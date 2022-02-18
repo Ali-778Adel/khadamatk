@@ -19,7 +19,8 @@ void main() async{
   AuthenticationDioHelper.initAuthDio();
   Bloc.observer = MyBlocObserver();
   await SharedPref_Helper.initSharedPref();
-  String token = await SharedPref_Helper.getDataFromShareprefrences(key: 'token') ?? 'no token is saved yet login to save your token !';
+  String? token = await SharedPref_Helper.getDataFromShareprefrences(key: 'to'
+      'ken') ;
   bool isFormCompleted=await SharedPref_Helper.getDataFromSharepref(key: 'isFormCompleted');
   print(SharedPref_Helper.getDataFromSharepref(key: 'name').toString());
   print('i print $token' );
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
     if (token!=null) {
       print('App Layout Selected');
       return const AppLayout();
-    } else if(token==null&&isFormCompleted==false){
+    } else if(token==null){
       return LoginScreen();
     }else{
       return Scaffold();
