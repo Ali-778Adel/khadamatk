@@ -7,6 +7,7 @@ import 'package:khadamatic_auth/cubit/login_cubit.dart';
 import 'package:khadamatic_auth/cubit/client_register_cubit.dart';
 import 'package:khadamatic_auth/cubit/worker/worker_homepage_cubit.dart';
 import 'package:khadamatic_auth/networks/authentication_dio_helper.dart';
+import 'package:khadamatic_auth/screens/app_layout.dart';
 import 'package:khadamatic_auth/screens/client_technical_option.dart';
 import 'package:khadamatic_auth/screens/login_screen.dart';
 import 'package:khadamatic_auth/sharedpref/sharedpref.dart';
@@ -22,7 +23,7 @@ void main() async{
   bool isFormCompleted=await SharedPref_Helper.getDataFromSharepref(key: 'isFormCompleted');
   print(SharedPref_Helper.getDataFromSharepref(key: 'name').toString());
   print('i print $token' );
-  runApp( MyApp());
+  runApp( MyApp(token:  token,));
 }
 
 class MyApp extends StatelessWidget {
@@ -30,9 +31,10 @@ class MyApp extends StatelessWidget {
   bool ?isFormCompleted;
   MyApp({ this.token,this.isFormCompleted, Key? key}) : super(key: key);
   Widget launch() {
-    if (token!=null&&isFormCompleted==false) {
-      return const Scaffold();
-    } else if(token!=null&&isFormCompleted==false){
+    if (token!=null) {
+      print('App Layout Selected');
+      return const AppLayout();
+    } else if(token==null&&isFormCompleted==false){
       return LoginScreen();
     }else{
       return Scaffold();
@@ -53,7 +55,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: lightTheme,
-        home: const ClientTechnicalOptionScreen(),
+        home: launch(),
       ),
     );
   }

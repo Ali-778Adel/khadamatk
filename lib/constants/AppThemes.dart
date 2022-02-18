@@ -36,6 +36,9 @@ var lightTheme = ThemeData(
           offset: Offset(1,1)
         )
       ])),
+  textTheme: const TextTheme(
+    headline6:TextStyle(color: Colors.white,fontSize: 15),
+  ),
 
   primarySwatch: Colors.blue,
 );

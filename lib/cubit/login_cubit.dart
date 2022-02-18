@@ -53,6 +53,7 @@ class LoginCubit extends Cubit<LoginStates> {
       response = value.data;
       print('login reponse is ${response.toString()}');
       loginModel=LoginModel.fromJson(value.data);
+      setUserDataToSharedPref(token: loginModel!.token);
       emit(LoginSuccessState(loginModel!));
     }).catchError((error) {
       emit(LoginFailureState(loginModel!));
